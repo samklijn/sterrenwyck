@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sterrenwyck · Onder de sterren</title>
+  <meta name="description" content="Voorbeeldwebsite richting 1 voor Sterrenwyck, Haarlem.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500;600&display=swap">
+  <style>
+    :root {
+      --bg: #0B1220;
+      --card: #111A2B;
+      --ink: #F2F4F8;
+      --muted: #8B9AB4;
+      --hair: #22304A;
+      --accent: #B08D57;
+      --accent-ink: #12151C;
+      --accent-text: #C9A56E;
+      --nav-solid: rgba(11,18,32,.86);
+      --input: #0E1729;
+      --demo-bg: #B08D57;
+      --demo-ink: #12151C;
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --body: 'Inter', -apple-system, Segoe UI, sans-serif;
+      --dw: 600;
+      --dls: -.01em;
+      --brand-ls: .02em;
+      --brand-tt: none;
+      --radius: 3px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--ink);
+           font-family: var(--body); font-size: 17px; line-height: 1.65;
+           -webkit-font-smoothing: antialiased; }
+    img, svg { max-width: 100%; display: block; }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: var(--display); font-weight: var(--dw);
+                 margin: 0; line-height: 1.08; letter-spacing: var(--dls); }
+    .wrap { width: 100%; max-width: 1180px; margin: 0 auto;
+            padding: 0 clamp(20px, 5vw, 56px); }
+    .demo { background: var(--demo-bg); color: var(--demo-ink);
+            font-family: var(--body); font-size: 11.5px; letter-spacing: .09em;
+            text-transform: uppercase; text-align: center;
+            padding: 9px 16px; position: relative; z-index: 60; }
+    .nav { position: sticky; top: 0; z-index: 50; display: flex;
+           align-items: center; justify-content: space-between; gap: 24px;
+           padding: 18px clamp(20px, 5vw, 56px);
+           transition: background .3s ease, border-color .3s ease;
+           border-bottom: 1px solid transparent; }
+    .nav.solid { background: var(--nav-solid); border-color: var(--hair);
+                 backdrop-filter: blur(10px); }
+    .brand { font-family: var(--display); font-size: 20px;
+             letter-spacing: var(--brand-ls); text-transform: var(--brand-tt);
+             text-decoration: none; }
+    .nav ul { display: flex; gap: 26px; list-style: none; margin: 0;
+              padding: 0; font-size: 13.5px; letter-spacing: .04em; }
+    .nav a { text-decoration: none; opacity: .8; }
+    .nav a:hover { opacity: 1; }
+    .btn { display: inline-block; text-decoration: none; cursor: pointer;
+           font-family: var(--body); font-size: 13.5px; letter-spacing: .08em;
+           text-transform: uppercase; padding: 13px 24px;
+           border: 1px solid var(--accent); background: var(--accent);
+           color: var(--accent-ink); border-radius: var(--radius);
+           transition: transform .2s ease, opacity .2s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn.ghost { background: transparent; color: var(--ink);
+                 border-color: var(--hair); }
+    .nav .btn { padding: 10px 18px; }
+    section { padding: clamp(64px, 9vw, 130px) 0; }
+    .eyebrow { font-family: var(--body); font-size: 11.5px;
+               letter-spacing: .22em; text-transform: uppercase;
+               color: var(--accent-text); margin: 0 0 18px; }
+    .lead { font-size: clamp(19px, 2.1vw, 23px); line-height: 1.5;
+            color: var(--ink); }
+    .muted { color: var(--muted); }
+    .hair { height: 1px; background: var(--hair); border: 0; margin: 0; }
+    [data-reveal] { opacity: 0; transform: translateY(22px);
+                    transition: opacity .7s ease, transform .7s ease; }
+    [data-reveal].in { opacity: 1; transform: none; }
+    .grid { display: grid; gap: clamp(20px, 3vw, 34px); }
+    .g2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .g3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .g4 { grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); }
+    .stats { display: grid; gap: 1px; background: var(--hair);
+             border: 1px solid var(--hair); border-radius: var(--radius);
+             overflow: hidden; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .stat { background: var(--bg); padding: 22px 20px; }
+    .stat b { display: block; font-family: var(--display);
+              font-size: clamp(24px, 3vw, 34px); font-weight: var(--dw);
+              line-height: 1; margin-bottom: 8px; }
+    .stat span { font-size: 12px; letter-spacing: .12em;
+                 text-transform: uppercase; color: var(--muted); }
+    .card { background: var(--card); border: 1px solid var(--hair);
+            border-radius: var(--radius); padding: clamp(22px, 2.6vw, 32px); }
+    .card h3 { font-size: 22px; margin-bottom: 8px; }
+    .rows { border-top: 1px solid var(--hair); }
+    .row { display: flex; justify-content: space-between; gap: 20px;
+           padding: 15px 0; border-bottom: 1px solid var(--hair);
+           font-size: 15.5px; }
+    .row span:last-child { color: var(--muted); text-align: right; }
+    form { display: grid; gap: 14px; max-width: 540px; }
+    label { font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+            color: var(--muted); display: block; margin-bottom: 6px; }
+    input, select { width: 100%; font-family: var(--body); font-size: 16px;
+                    padding: 13px 15px; color: var(--ink);
+                    background: var(--input); border: 1px solid var(--hair);
+                    border-radius: var(--radius); }
+    input:focus, select:focus { outline: 2px solid var(--accent);
+                                outline-offset: 1px; }
+    .fine { font-size: 12.5px; line-height: 1.6; color: var(--muted); }
+    .msg { font-size: 14px; padding: 13px 15px; border-radius: var(--radius);
+           background: var(--card); border: 1px solid var(--accent); }
+    footer { padding: 56px 0 40px; border-top: 1px solid var(--hair); }
+    .foot { display: flex; flex-wrap: wrap; gap: 28px;
+            justify-content: space-between; align-items: flex-start; }
+    .foot h4 { font-family: var(--body); font-size: 11.5px;
+               letter-spacing: .18em; text-transform: uppercase;
+               color: var(--muted); margin: 0 0 8px; font-weight: 600; }
+    .switch { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .switch a { font-size: 12.5px; letter-spacing: .06em; padding: 9px 15px;
+                border: 1px solid var(--hair); border-radius: 999px;
+                text-decoration: none; color: var(--muted); }
+    .switch a:hover, .switch a[aria-current] { color: var(--ink);
+                border-color: var(--accent); }
+    @media (max-width: 780px) { .nav ul { display: none; } }
+
+
+    .hero { position: relative; min-height: min(88vh, 780px);
+            display: flex; align-items: flex-end; overflow: hidden; }
+    .hero .art { position: absolute; inset: 0; }
+    .hero .art::after { content: ''; position: absolute; inset: 0;
+        background: linear-gradient(180deg, rgba(11,18,32,.25) 0%,
+                    rgba(11,18,32,.72) 62%, var(--bg) 100%); }
+    .hero .wrap { position: relative; padding-bottom: clamp(48px, 7vw, 92px);
+                  padding-top: 120px; }
+    .hero h1 { font-size: clamp(46px, 8.4vw, 108px); font-weight: 400; }
+    .hero h1 em { font-style: italic; color: var(--accent-text); }
+    .hero .lead { max-width: 620px; margin: 24px 0 34px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+    .const { display: grid; place-items: center; width: 46px; height: 46px;
+             border: 1px solid var(--accent); border-radius: 50%;
+             font-family: var(--display); font-size: 20px;
+             color: var(--accent-text); margin-bottom: 18px; }
+    .quote { font-family: var(--display); font-style: italic;
+             font-size: clamp(24px, 3.4vw, 40px); line-height: 1.3;
+             max-width: 900px; }
+
+  </style>
+</head>
+<body>
+  <div class="demo">VOORBEELD · richting 1 van 3 — concept door Spring Marketing Agency, geen officiële projectwebsite</div>
+    <header class="nav">
+    <a class="brand" href="#top">Sterrenwyck</a>
+    <nav><ul><li><a href="#project">Het project</a></li><li><a href="#woningen">Woningen</a></li><li><a href="#locatie">Ligging</a></li><li><a href="#duurzaam">Groen</a></li></ul></nav>
+    <a class="btn" href="#interesse">Interesselijst</a>
+  </header>
+  <main id="top">
+    <div class="hero">
+      <div class="art"><svg viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%"><defs><radialGradient id="glow" cx="50%" cy="18%" r="72%"><stop offset="0" stop-color="#1B2C4D"/><stop offset="1" stop-color="#0B1220"/></radialGradient></defs><rect width="1200" height="520" fill="url(#glow)"/><circle cx="388.6" cy="78.4" r="0.7" fill="#F2F4F8" opacity="0.30"/><circle cx="643.1" cy="190.2" r="0.7" fill="#F2F4F8" opacity="0.89"/><circle cx="257.6" cy="44.7" r="1.4" fill="#F2F4F8" opacity="0.30"/><circle cx="108.9" cy="220.7" r="1.8" fill="#F2F4F8" opacity="0.34"/><circle cx="267.9" cy="326.3" r="0.7" fill="#F2F4F8" opacity="0.65"/><circle cx="476.0" cy="507.7" r="0.7" fill="#F2F4F8" opacity="0.64"/><circle cx="159.8" cy="218.0" r="1.8" fill="#F2F4F8" opacity="0.33"/><circle cx="370.2" cy="424.4" r="0.9" fill="#F2F4F8" opacity="0.32"/><circle cx="685.4" cy="97.7" r="0.7" fill="#F2F4F8" opacity="0.63"/><circle cx="75.3" cy="31.0" r="0.9" fill="#F2F4F8" opacity="0.60"/><circle cx="638.1" cy="404.2" r="1.4" fill="#F2F4F8" opacity="0.66"/><circle cx="543.8" cy="155.9" r="0.9" fill="#F2F4F8" opacity="0.74"/><circle cx="292.9" cy="298.7" r="1.8" fill="#F2F4F8" opacity="0.60"/><circle cx="412.2" cy="233.4" r="1.8" fill="#F2F4F8" opacity="0.94"/><circle cx="141.7" cy="217.4" r="1.1" fill="#F2F4F8" opacity="0.36"/><circle cx="586.8" cy="20.4" r="0.7" fill="#F2F4F8" opacity="0.79"/><circle cx="687.6" cy="455.2" r="1.1" fill="#F2F4F8" opacity="0.49"/><circle cx="420.2" cy="258.3" r="1.4" fill="#F2F4F8" opacity="0.30"/><circle cx="112.3" cy="140.4" r="0.7" fill="#F2F4F8" opacity="0.29"/><circle cx="841.8" cy="336.5" r="1.4" fill="#F2F4F8" opacity="0.45"/><circle cx="462.9" cy="347.7" r="0.7" fill="#F2F4F8" opacity="0.91"/><circle cx="426.6" cy="317.7" r="1.4" fill="#F2F4F8" opacity="0.29"/><circle cx="921.9" cy="67.3" r="0.9" fill="#F2F4F8" opacity="0.53"/><circle cx="1100.2" cy="258.2" r="0.9" fill="#F2F4F8" opacity="0.56"/><circle cx="659.3" cy="459.4" r="1.4" fill="#F2F4F8" opacity="0.85"/><circle cx="334.1" cy="216.0" r="1.1" fill="#F2F4F8" opacity="0.73"/><circle cx="456.5" cy="120.0" r="0.7" fill="#F2F4F8" opacity="0.37"/><circle cx="278.3" cy="121.3" r="1.4" fill="#F2F4F8" opacity="0.83"/><circle cx="218.8" cy="146.6" r="0.9" fill="#F2F4F8" opacity="0.54"/><circle cx="443.1" cy="294.5" r="0.9" fill="#F2F4F8" opacity="0.73"/><circle cx="618.6" cy="321.1" r="0.7" fill="#F2F4F8" opacity="0.57"/><circle cx="1045.2" cy="495.0" r="1.8" fill="#F2F4F8" opacity="0.52"/><circle cx="478.8" cy="53.8" r="1.4" fill="#F2F4F8" opacity="0.29"/><circle cx="80.8" cy="108.6" r="0.9" fill="#F2F4F8" opacity="0.33"/><circle cx="720.9" cy="53.2" r="1.8" fill="#F2F4F8" opacity="0.36"/><circle cx="121.8" cy="189.1" r="0.7" fill="#F2F4F8" opacity="0.30"/><circle cx="249.5" cy="195.6" r="1.1" fill="#F2F4F8" opacity="0.92"/><circle cx="722.7" cy="246.6" r="0.7" fill="#F2F4F8" opacity="0.84"/><circle cx="1191.7" cy="242.3" r="1.4" fill="#F2F4F8" opacity="0.47"/><circle cx="172.9" cy="389.8" r="1.1" fill="#F2F4F8" opacity="0.59"/><circle cx="830.5" cy="268.5" r="0.9" fill="#F2F4F8" opacity="0.92"/><circle cx="633.9" cy="76.2" r="1.8" fill="#F2F4F8" opacity="0.89"/><circle cx="909.8" cy="155.0" r="0.7" fill="#F2F4F8" opacity="0.74"/><circle cx="313.3" cy="190.7" r="0.9" fill="#F2F4F8" opacity="0.50"/><circle cx="267.4" cy="281.6" r="1.8" fill="#F2F4F8" opacity="0.48"/><circle cx="267.7" cy="422.0" r="0.9" fill="#F2F4F8" opacity="0.81"/><circle cx="982.0" cy="384.7" r="0.9" fill="#F2F4F8" opacity="0.39"/><circle cx="591.3" cy="380.1" r="0.7" fill="#F2F4F8" opacity="0.80"/><circle cx="566.7" cy="100.7" r="1.8" fill="#F2F4F8" opacity="0.92"/><circle cx="536.7" cy="487.3" r="1.1" fill="#F2F4F8" opacity="0.92"/><circle cx="437.6" cy="114.6" r="0.9" fill="#F2F4F8" opacity="0.58"/><circle cx="405.3" cy="251.0" r="1.8" fill="#F2F4F8" opacity="0.84"/><circle cx="575.4" cy="339.5" r="0.7" fill="#F2F4F8" opacity="0.83"/><circle cx="143.9" cy="202.0" r="0.9" fill="#F2F4F8" opacity="0.58"/><circle cx="214.2" cy="410.4" r="1.1" fill="#F2F4F8" opacity="0.31"/><circle cx="1135.4" cy="375.3" r="1.4" fill="#F2F4F8" opacity="0.53"/><circle cx="1136.2" cy="376.9" r="0.9" fill="#F2F4F8" opacity="0.95"/><circle cx="33.1" cy="307.2" r="1.4" fill="#F2F4F8" opacity="0.81"/><circle cx="175.4" cy="429.8" r="1.4" fill="#F2F4F8" opacity="0.71"/><circle cx="420.5" cy="285.3" r="0.9" fill="#F2F4F8" opacity="0.26"/><circle cx="959.2" cy="377.7" r="0.7" fill="#F2F4F8" opacity="0.62"/><circle cx="1120.3" cy="225.6" r="0.9" fill="#F2F4F8" opacity="0.83"/><circle cx="253.3" cy="131.0" r="1.1" fill="#F2F4F8" opacity="0.60"/><circle cx="916.4" cy="169.5" r="1.8" fill="#F2F4F8" opacity="0.54"/><circle cx="157.3" cy="473.2" r="1.1" fill="#F2F4F8" opacity="0.88"/><circle cx="795.0" cy="423.8" r="1.8" fill="#F2F4F8" opacity="0.54"/><circle cx="1101.3" cy="260.9" r="1.8" fill="#F2F4F8" opacity="0.36"/><circle cx="612.7" cy="453.9" r="0.9" fill="#F2F4F8" opacity="0.68"/><circle cx="931.2" cy="77.9" r="0.9" fill="#F2F4F8" opacity="0.58"/><circle cx="870.2" cy="289.4" r="1.1" fill="#F2F4F8" opacity="0.73"/><circle cx="636.9" cy="250.9" r="0.7" fill="#F2F4F8" opacity="0.87"/><circle cx="68.2" cy="99.5" r="0.7" fill="#F2F4F8" opacity="0.79"/><circle cx="609.3" cy="292.1" r="0.7" fill="#F2F4F8" opacity="0.56"/><circle cx="735.0" cy="262.9" r="1.8" fill="#F2F4F8" opacity="0.39"/><circle cx="332.6" cy="264.2" r="1.4" fill="#F2F4F8" opacity="0.61"/><circle cx="297.2" cy="272.1" r="1.1" fill="#F2F4F8" opacity="0.90"/><circle cx="1071.3" cy="105.3" r="1.4" fill="#F2F4F8" opacity="0.35"/><circle cx="145.9" cy="229.9" r="0.7" fill="#F2F4F8" opacity="0.72"/><circle cx="514.0" cy="110.6" r="1.1" fill="#F2F4F8" opacity="0.80"/><circle cx="1076.4" cy="80.3" r="1.1" fill="#F2F4F8" opacity="0.35"/><circle cx="1059.4" cy="503.1" r="0.9" fill="#F2F4F8" opacity="0.77"/><circle cx="113.0" cy="460.2" r="0.9" fill="#F2F4F8" opacity="0.94"/><circle cx="998.9" cy="84.0" r="1.4" fill="#F2F4F8" opacity="0.95"/><circle cx="484.6" cy="219.1" r="1.1" fill="#F2F4F8" opacity="0.47"/><circle cx="866.6" cy="10.1" r="1.8" fill="#F2F4F8" opacity="0.57"/><circle cx="843.8" cy="199.9" r="1.8" fill="#F2F4F8" opacity="0.69"/><circle cx="614.7" cy="33.4" r="0.9" fill="#F2F4F8" opacity="0.93"/><circle cx="125.7" cy="138.1" r="0.7" fill="#F2F4F8" opacity="0.88"/><circle cx="217.9" cy="393.0" r="1.4" fill="#F2F4F8" opacity="0.84"/><circle cx="811.2" cy="491.9" r="1.4" fill="#F2F4F8" opacity="0.35"/><circle cx="1103.0" cy="296.7" r="1.1" fill="#F2F4F8" opacity="0.31"/><circle cx="69.0" cy="357.9" r="1.4" fill="#F2F4F8" opacity="0.88"/><circle cx="322.7" cy="8.8" r="0.7" fill="#F2F4F8" opacity="0.81"/><circle cx="100.5" cy="445.2" r="0.7" fill="#F2F4F8" opacity="0.44"/><circle cx="146.0" cy="6.0" r="1.8" fill="#F2F4F8" opacity="0.54"/><circle cx="1098.5" cy="323.3" r="0.7" fill="#F2F4F8" opacity="0.62"/><circle cx="286.1" cy="56.9" r="0.9" fill="#F2F4F8" opacity="0.43"/><circle cx="217.4" cy="484.8" r="1.1" fill="#F2F4F8" opacity="0.62"/><circle cx="247.0" cy="231.8" r="0.9" fill="#F2F4F8" opacity="0.44"/><circle cx="964.4" cy="517.1" r="0.7" fill="#F2F4F8" opacity="0.26"/><circle cx="879.7" cy="286.5" r="0.9" fill="#F2F4F8" opacity="0.61"/><circle cx="294.8" cy="232.5" r="1.4" fill="#F2F4F8" opacity="0.71"/><circle cx="655.1" cy="462.1" r="1.8" fill="#F2F4F8" opacity="0.47"/><circle cx="258.2" cy="119.4" r="0.9" fill="#F2F4F8" opacity="0.83"/><circle cx="848.1" cy="330.7" r="1.4" fill="#F2F4F8" opacity="0.94"/><circle cx="1178.3" cy="435.2" r="0.7" fill="#F2F4F8" opacity="0.30"/><circle cx="889.1" cy="132.9" r="0.9" fill="#F2F4F8" opacity="0.29"/><circle cx="798.3" cy="198.1" r="1.8" fill="#F2F4F8" opacity="0.72"/><circle cx="338.3" cy="126.0" r="1.1" fill="#F2F4F8" opacity="0.28"/><circle cx="222.4" cy="139.9" r="0.7" fill="#F2F4F8" opacity="0.43"/><circle cx="1154.1" cy="505.8" r="1.8" fill="#F2F4F8" opacity="0.48"/><circle cx="41.3" cy="458.8" r="0.9" fill="#F2F4F8" opacity="0.50"/><circle cx="1.3" cy="198.4" r="1.4" fill="#F2F4F8" opacity="0.45"/><circle cx="787.2" cy="129.1" r="0.7" fill="#F2F4F8" opacity="0.31"/><circle cx="980.5" cy="74.8" r="1.8" fill="#F2F4F8" opacity="0.28"/><circle cx="27.0" cy="158.2" r="0.9" fill="#F2F4F8" opacity="0.31"/><circle cx="1149.2" cy="443.7" r="0.9" fill="#F2F4F8" opacity="0.71"/><circle cx="859.2" cy="457.1" r="1.4" fill="#F2F4F8" opacity="0.79"/><circle cx="864.8" cy="257.0" r="1.1" fill="#F2F4F8" opacity="0.76"/><circle cx="771.9" cy="22.8" r="1.8" fill="#F2F4F8" opacity="0.69"/><circle cx="880.6" cy="422.4" r="0.9" fill="#F2F4F8" opacity="0.89"/><circle cx="903.4" cy="295.6" r="0.7" fill="#F2F4F8" opacity="0.83"/><circle cx="700.9" cy="464.3" r="0.9" fill="#F2F4F8" opacity="0.31"/><circle cx="50.2" cy="331.3" r="0.7" fill="#F2F4F8" opacity="0.51"/><circle cx="541.7" cy="26.4" r="0.7" fill="#F2F4F8" opacity="0.69"/><circle cx="816.8" cy="254.4" r="0.7" fill="#F2F4F8" opacity="0.57"/><circle cx="84.1" cy="484.9" r="1.8" fill="#F2F4F8" opacity="0.31"/><circle cx="631.2" cy="387.8" r="1.4" fill="#F2F4F8" opacity="0.43"/><circle cx="89.3" cy="138.1" r="0.9" fill="#F2F4F8" opacity="0.41"/><circle cx="779.9" cy="239.4" r="1.4" fill="#F2F4F8" opacity="0.30"/><circle cx="1092.6" cy="149.4" r="0.7" fill="#F2F4F8" opacity="0.68"/><circle cx="771.3" cy="40.3" r="0.9" fill="#F2F4F8" opacity="0.48"/><circle cx="781.8" cy="360.3" r="1.8" fill="#F2F4F8" opacity="0.65"/><circle cx="15.0" cy="31.5" r="1.1" fill="#F2F4F8" opacity="0.93"/><circle cx="119.4" cy="113.2" r="1.4" fill="#F2F4F8" opacity="0.45"/><circle cx="619.8" cy="241.6" r="1.4" fill="#F2F4F8" opacity="0.79"/><circle cx="1192.0" cy="285.5" r="1.1" fill="#F2F4F8" opacity="0.93"/><circle cx="1123.5" cy="9.1" r="1.4" fill="#F2F4F8" opacity="0.30"/><circle cx="607.9" cy="517.2" r="1.1" fill="#F2F4F8" opacity="0.52"/><circle cx="1099.9" cy="483.9" r="0.7" fill="#F2F4F8" opacity="0.66"/><circle cx="170.1" cy="272.5" r="1.1" fill="#F2F4F8" opacity="0.34"/><circle cx="984.3" cy="264.5" r="0.7" fill="#F2F4F8" opacity="0.74"/><circle cx="277.7" cy="466.8" r="1.4" fill="#F2F4F8" opacity="0.53"/><circle cx="190.9" cy="494.0" r="1.4" fill="#F2F4F8" opacity="0.53"/><circle cx="872.6" cy="216.4" r="1.4" fill="#F2F4F8" opacity="0.47"/><circle cx="1008.3" cy="0.9" r="1.1" fill="#F2F4F8" opacity="0.84"/><circle cx="144.0" cy="481.7" r="0.7" fill="#F2F4F8" opacity="0.88"/><circle cx="347.8" cy="193.6" r="1.4" fill="#F2F4F8" opacity="0.52"/><circle cx="1044.0" cy="39.7" r="1.4" fill="#F2F4F8" opacity="0.78"/><circle cx="1025.1" cy="145.9" r="0.7" fill="#F2F4F8" opacity="0.83"/><line x1="210" y1="150" x2="300" y2="96" stroke="#B08D57" stroke-width="1.1" opacity=".85"/><line x1="300" y1="96" x2="395" y2="148" stroke="#B08D57" stroke-width="1.1" opacity=".85"/><line x1="395" y1="148" x2="470" y2="110" stroke="#B08D57" stroke-width="1.1" opacity=".85"/><line x1="470" y1="110" x2="545" y2="186" stroke="#B08D57" stroke-width="1.1" opacity=".85"/><line x1="545" y1="186" x2="455" y2="232" stroke="#B08D57" stroke-width="1.1" opacity=".85"/><line x1="455" y1="232" x2="352" y2="205" stroke="#B08D57" stroke-width="1.1" opacity=".85"/><circle cx="210" cy="150" r="4.2" fill="#B08D57"/><circle cx="210" cy="150" r="10" fill="none" stroke="#B08D57" stroke-width=".7" opacity=".45"/><circle cx="300" cy="96" r="4.2" fill="#B08D57"/><circle cx="300" cy="96" r="10" fill="none" stroke="#B08D57" stroke-width=".7" opacity=".45"/><circle cx="395" cy="148" r="4.2" fill="#B08D57"/><circle cx="395" cy="148" r="10" fill="none" stroke="#B08D57" stroke-width=".7" opacity=".45"/><circle cx="470" cy="110" r="4.2" fill="#B08D57"/><circle cx="470" cy="110" r="10" fill="none" stroke="#B08D57" stroke-width=".7" opacity=".45"/><circle cx="545" cy="186" r="4.2" fill="#B08D57"/><circle cx="545" cy="186" r="10" fill="none" stroke="#B08D57" stroke-width=".7" opacity=".45"/><circle cx="455" cy="232" r="4.2" fill="#B08D57"/><circle cx="455" cy="232" r="10" fill="none" stroke="#B08D57" stroke-width=".7" opacity=".45"/><circle cx="352" cy="205" r="4.2" fill="#B08D57"/><circle cx="352" cy="205" r="10" fill="none" stroke="#B08D57" stroke-width=".7" opacity=".45"/><rect x="120" y="416" width="150" height="104" fill="#0B1220" stroke="#26344F" stroke-width="1"/><rect x="138" y="428" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="170" y="428" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="202" y="428" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="234" y="428" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="138" y="454" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="170" y="454" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="202" y="454" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="234" y="454" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="138" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="170" y="480" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="202" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="234" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="138" y="506" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="170" y="506" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="202" y="506" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="234" y="506" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="288" y="442" width="150" height="78" fill="#0B1220" stroke="#26344F" stroke-width="1"/><rect x="306" y="454" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="338" y="454" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="370" y="454" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="402" y="454" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="306" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="338" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="370" y="480" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="402" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="306" y="506" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="338" y="506" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="370" y="506" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="402" y="506" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="456" y="390" width="150" height="130" fill="#0B1220" stroke="#26344F" stroke-width="1"/><rect x="474" y="402" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="506" y="402" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="538" y="402" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="570" y="402" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="474" y="428" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="506" y="428" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="538" y="428" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="570" y="428" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="474" y="454" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="506" y="454" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="538" y="454" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="570" y="454" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="474" y="480" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="506" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="538" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="570" y="480" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="474" y="506" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="506" y="506" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="538" y="506" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="570" y="506" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="624" y="416" width="150" height="104" fill="#0B1220" stroke="#26344F" stroke-width="1"/><rect x="642" y="428" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="674" y="428" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="706" y="428" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="738" y="428" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="642" y="454" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="674" y="454" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="706" y="454" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="738" y="454" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="642" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="674" y="480" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="706" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="738" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="642" y="506" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="674" y="506" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="706" y="506" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="738" y="506" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="792" y="364" width="150" height="156" fill="#0B1220" stroke="#26344F" stroke-width="1"/><rect x="810" y="376" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="842" y="376" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="874" y="376" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="906" y="376" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="810" y="402" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="842" y="402" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="874" y="402" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="906" y="402" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="810" y="428" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="842" y="428" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="874" y="428" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="906" y="428" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="810" y="454" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="842" y="454" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="874" y="454" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="906" y="454" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="810" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="842" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="874" y="480" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="906" y="480" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="810" y="506" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="842" y="506" width="17" height="11" fill="#B08D57" opacity=".25"/><rect x="874" y="506" width="17" height="11" fill="#B08D57" opacity=".85"/><rect x="906" y="506" width="17" height="11" fill="#B08D57" opacity=".85"/></svg></div>
+      <div class="wrap">
+        <p class="eyebrow">Houtvaartkwartier · Haarlem Zuid-West</p>
+        <h1>Wonen <em>onder<br>de sterren</em>.</h1>
+        <p class="lead">Drieëndertig koopappartementen aan de Grijpensteinweg / Munterslaan,
+          in een buurt die vernoemd is naar natuurkundigen. Vijf minuten van
+          de trein, twintig van het strand.</p>
+        <div class="cta-row">
+          <a class="btn" href="#interesse">Zet mij op de lijst</a>
+          <a class="btn ghost" href="#woningen">Bekijk de woningen</a>
+        </div>
+      </div>
+    </div>
+
+    <section id="project">
+      <div class="wrap">
+        <div class="grid g2" style="align-items:start">
+          <div data-reveal>
+            <p class="eyebrow">Het project</p>
+            <h2 style="font-size:clamp(30px,4vw,52px);font-weight:400">
+              Een adres met een<br>eigen sterrenbeeld.</h2>
+          </div>
+          <div data-reveal>
+            <p class="lead">Sterrenwyck is de omslag van een verouderd
+              bedrijventerrein naar een stuk stad met bomen, een groene hof en
+              voordeuren aan de straat. Drie, vier en vijf lagen, met een
+              accent van zes op de hoek met de Munterslaan.</p>
+            <p class="muted" style="margin-bottom:0">Straatnamen als Einstein
+              en Tesla verraden waar je bent: de natuurkundigenbuurt. Wij namen
+              die gedachte serieus — in de naam, in het beeld, en in de manier
+              waarop dit plan naar de lucht kijkt.</p>
+          </div>
+        </div>
+        <div style="margin-top:clamp(40px,5vw,70px)" data-reveal><div class="stats"><div class="stat"><b>33</b><span>koopwoningen</span></div><div class="stat"><b>3–6</b><span>bouwlagen</span></div><div class="stat"><b>5 min</b><span>naar de trein</span></div><div class="stat"><b>2027</b><span>start verkoop</span></div></div></div>
+      </div>
+    </section>
+
+    <section id="woningen" style="padding-top:0">
+      <div class="wrap">
+        <div data-reveal style="margin-bottom:clamp(28px,3.4vw,46px)">
+          <p class="eyebrow">De woningen</p>
+          <h2 style="font-size:clamp(28px,3.4vw,44px);font-weight:400">
+            Vier typen, één ensemble.</h2>
+        </div>
+        <div class="grid g4">        <article class="card" data-reveal>
+          <div class="const">A</div>
+          <h3>Twee kamers</h3>
+          <p class="muted" style="margin:.2em 0 14px;font-size:15px">± 55 m²</p>
+          <p style="margin:0;font-size:15.5px">Compact wonen aan de fietsstraat, met een diep balkon aan de hofzijde.</p>
+        </article>        <article class="card" data-reveal>
+          <div class="const">B</div>
+          <h3>Drie kamers</h3>
+          <p class="muted" style="margin:.2em 0 14px;font-size:15px">± 75 m²</p>
+          <p style="margin:0;font-size:15.5px">De ruggengraat van het plan: een woonkamer op het zuiden, twee slaapkamers, buitenruimte aan de hof.</p>
+        </article>        <article class="card" data-reveal>
+          <div class="const">C</div>
+          <h3>Vier kamers</h3>
+          <p class="muted" style="margin:.2em 0 14px;font-size:15px">± 95 m²</p>
+          <p style="margin:0;font-size:15.5px">Voor wie blijft. Hoekligging, twee oriëntaties en ruimte voor een werkplek.</p>
+        </article>        <article class="card" data-reveal>
+          <div class="const">D</div>
+          <h3>Hoekappartement</h3>
+          <p class="muted" style="margin:.2em 0 14px;font-size:15px">± 110 m²</p>
+          <p style="margin:0;font-size:15.5px">In het zeslaagse accent op de hoek met de Munterslaan — uitzicht over het Einsteinplantsoen.</p>
+        </article></div>
+        <p class="fine" style="margin-top:22px">Typen, oppervlakten en
+          plattegronden zijn indicatief en worden definitief bij de start van
+          de verkoop.</p>
+      </div>
+    </section>
+
+    <section id="locatie" style="background:var(--card)">
+      <div class="wrap">
+        <div class="grid g2" style="align-items:start">
+          <div data-reveal>
+            <p class="eyebrow">De ligging</p>
+            <h2 style="font-size:clamp(28px,3.4vw,44px);font-weight:400">
+              Tussen De Hout<br>en de kust.</h2>
+            <p class="lead" style="margin-top:20px">Vanaf station
+              Heemstede-Aerdenhout zit je zonder overstappen in Amsterdam of
+              Leiden. En op de fiets ben je eerder op het strand dan de meeste
+              Amsterdammers op hun werk.</p>
+          </div>
+          <div data-reveal><div class="rows"><div class="row"><span>Station Heemstede-Aerdenhout</span><span>op loopafstand</span></div><div class="row"><span>Amsterdam Centraal</span><span>± 25 min met de trein</span></div><div class="row"><span>Leiden Centraal</span><span>± 20 min met de trein</span></div><div class="row"><span>Centrum Haarlem</span><span>± 10 min op de fiets</span></div><div class="row"><span>De Hout & de Houtvaart</span><span>om de hoek</span></div><div class="row"><span>Strand Bloemendaal</span><span>± 20 min op de fiets</span></div></div>
+            <p class="fine" style="margin-top:16px">Reistijden indicatief.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="duurzaam">
+      <div class="wrap">
+        <div data-reveal style="margin-bottom:clamp(28px,3.4vw,46px)">
+          <p class="eyebrow">Klimaat &amp; groen</p>
+          <h2 style="font-size:clamp(28px,3.4vw,44px);font-weight:400">
+            Een buurt die zichzelf koel houdt.</h2>
+        </div>
+        <div class="grid g3"><article class="card" data-reveal><h3>Groene daken</h3><p style="margin:0;font-size:15.5px" class="muted">Daken worden vergroend en waar mogelijk voorzien van zonnepanelen.</p></article><article class="card" data-reveal><h3>Water op eigen terrein</h3><p style="margin:0;font-size:15.5px" class="muted">Regenwater wordt op het binnenterrein geborgen — klimaatadaptief en koeler in de zomer.</p></article><article class="card" data-reveal><h3>Fietsstraat & deelmobiliteit</h3><p style="margin:0;font-size:15.5px" class="muted">De Grijpensteinweg wordt een fietsstraat; parkeren verdwijnt uit het straatbeeld.</p></article></div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <p class="quote" data-reveal>&ldquo;Aan de ene kant het
+          Einsteinplantsoen en de bomen van de Munterslaan, aan de andere kant
+          de trein naar Amsterdam. Daartussen: drieëndertig voordeuren.&rdquo;
+        </p>
+      </div>
+    </section>
+
+    <section id="interesse" style="background:var(--card)">
+      <div class="wrap">      <div data-reveal>
+        <p class="eyebrow">Interesselijst</p>
+        <h2>Als eerste horen wanneer de verkoop start.</h2>
+        <p class="lead muted" style="max-width:640px;margin:18px 0 30px">De interesselijst bepaalt de volgorde bij de pre-sale. Inschrijven is gratis en verplicht je tot niets.</p>
+      </div>
+      <form data-demo data-reveal>
+        <div><label for="naam">Naam</label>
+          <input id="naam" name="naam" type="text" placeholder="Voor- en achternaam"></div>
+        <div><label for="mail">E-mailadres</label>
+          <input id="mail" name="mail" type="email" placeholder="jij@voorbeeld.nl"></div>
+        <div><label for="type">Woningvoorkeur</label>
+          <select id="type" name="type">
+            <option>Twee kamers · ± 55 m²</option>
+            <option>Drie kamers · ± 75 m²</option>
+            <option>Vier kamers · ± 95 m²</option>
+            <option>Hoekappartement · ± 110 m²</option>
+            <option>Weet ik nog niet</option>
+          </select></div>
+        <button class="btn" type="submit">Zet mij op de lijst</button>
+        <p class="msg" data-msg hidden></p>
+        <p class="fine">Voorbeeldwebsite, gemaakt door Spring Marketing Agency om een merkrichting te tonen. Dit is niet de officiële projectwebsite van Sterrenwyck en niet uitgegeven door EFY Group of INBO. Alle woningtypen, oppervlakten en afstanden zijn indicatief.</p>
+      </form></div>
+    </section>
+  </main>
+  <footer id="colofon">
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <h4>Ontwikkeling</h4>
+          <p style="margin:0">EFY Group</p>
+        </div>
+        <div>
+          <h4>Stedenbouw &amp; architectuur</h4>
+          <p style="margin:0">INBO</p>
+        </div>
+        <div>
+          <h4>Marketing &amp; verkoop</h4>
+          <p style="margin:0">Spring Marketing Agency<br>
+            <span class="muted">onderdeel van Spring Real Estate</span></p>
+        </div>
+        <div>
+          <h4>Richting bekijken</h4>
+          <div class="switch"><a href="../">Alle drie de richtingen</a><a href="../onder-de-sterren/" aria-current="page">Onder de sterren</a><a href="../de-nieuwe-tuinstad/">De nieuwe tuinstad</a><a href="../wyck/">Wyck</a></div>
+        </div>
+      </div>
+      <hr class="hair" style="margin:34px 0 20px">
+      <p class="fine" style="max-width:820px">Voorbeeldwebsite, gemaakt door Spring Marketing Agency om een merkrichting te tonen. Dit is niet de officiële projectwebsite van Sterrenwyck en niet uitgegeven door EFY Group of INBO. Alle woningtypen, oppervlakten en afstanden zijn indicatief.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('[data-reveal]');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (e) { e.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (rows) {
+        rows.forEach(function (r) {
+          if (r.isIntersecting) { r.target.classList.add('in'); io.unobserve(r.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function (e) { io.observe(e); });
+
+      var form = document.querySelector('form[data-demo]');
+      if (form) {
+        form.addEventListener('submit', function (ev) {
+          ev.preventDefault();
+          var out = form.querySelector('[data-msg]');
+          out.hidden = false;
+          out.textContent = 'Dit is een voorbeeldwebsite — er is geen ' +
+            'inschrijving verstuurd en er zijn geen gegevens opgeslagen.';
+        });
+      }
+
+      var nav = document.querySelector('.nav');
+      if (nav) {
+        window.addEventListener('scroll', function () {
+          nav.classList.toggle('solid', window.scrollY > 40);
+        }, { passive: true });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sterrenwyck · De nieuwe tuinstad</title>
+  <meta name="description" content="Voorbeeldwebsite richting 2 voor Sterrenwyck, Haarlem.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400;1,600&family=Inter:wght@400;500;600&display=swap">
+  <style>
+    :root {
+      --bg: #F5F2E9;
+      --card: #EFEADB;
+      --ink: #2A241E;
+      --muted: #6B6455;
+      --hair: #D9D1BC;
+      --accent: #2F4634;
+      --accent-ink: #F5F2E9;
+      --accent-text: #4E6B45;
+      --nav-solid: rgba(245,242,233,.9);
+      --input: #FFFFFF;
+      --demo-bg: #2F4634;
+      --demo-ink: #F5F2E9;
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --body: 'Inter', -apple-system, Segoe UI, sans-serif;
+      --dw: 600;
+      --dls: -.005em;
+      --brand-ls: .03em;
+      --brand-tt: none;
+      --radius: 14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--ink);
+           font-family: var(--body); font-size: 17px; line-height: 1.65;
+           -webkit-font-smoothing: antialiased; }
+    img, svg { max-width: 100%; display: block; }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: var(--display); font-weight: var(--dw);
+                 margin: 0; line-height: 1.08; letter-spacing: var(--dls); }
+    .wrap { width: 100%; max-width: 1180px; margin: 0 auto;
+            padding: 0 clamp(20px, 5vw, 56px); }
+    .demo { background: var(--demo-bg); color: var(--demo-ink);
+            font-family: var(--body); font-size: 11.5px; letter-spacing: .09em;
+            text-transform: uppercase; text-align: center;
+            padding: 9px 16px; position: relative; z-index: 60; }
+    .nav { position: sticky; top: 0; z-index: 50; display: flex;
+           align-items: center; justify-content: space-between; gap: 24px;
+           padding: 18px clamp(20px, 5vw, 56px);
+           transition: background .3s ease, border-color .3s ease;
+           border-bottom: 1px solid transparent; }
+    .nav.solid { background: var(--nav-solid); border-color: var(--hair);
+                 backdrop-filter: blur(10px); }
+    .brand { font-family: var(--display); font-size: 20px;
+             letter-spacing: var(--brand-ls); text-transform: var(--brand-tt);
+             text-decoration: none; }
+    .nav ul { display: flex; gap: 26px; list-style: none; margin: 0;
+              padding: 0; font-size: 13.5px; letter-spacing: .04em; }
+    .nav a { text-decoration: none; opacity: .8; }
+    .nav a:hover { opacity: 1; }
+    .btn { display: inline-block; text-decoration: none; cursor: pointer;
+           font-family: var(--body); font-size: 13.5px; letter-spacing: .08em;
+           text-transform: uppercase; padding: 13px 24px;
+           border: 1px solid var(--accent); background: var(--accent);
+           color: var(--accent-ink); border-radius: var(--radius);
+           transition: transform .2s ease, opacity .2s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn.ghost { background: transparent; color: var(--ink);
+                 border-color: var(--hair); }
+    .nav .btn { padding: 10px 18px; }
+    section { padding: clamp(64px, 9vw, 130px) 0; }
+    .eyebrow { font-family: var(--body); font-size: 11.5px;
+               letter-spacing: .22em; text-transform: uppercase;
+               color: var(--accent-text); margin: 0 0 18px; }
+    .lead { font-size: clamp(19px, 2.1vw, 23px); line-height: 1.5;
+            color: var(--ink); }
+    .muted { color: var(--muted); }
+    .hair { height: 1px; background: var(--hair); border: 0; margin: 0; }
+    [data-reveal] { opacity: 0; transform: translateY(22px);
+                    transition: opacity .7s ease, transform .7s ease; }
+    [data-reveal].in { opacity: 1; transform: none; }
+    .grid { display: grid; gap: clamp(20px, 3vw, 34px); }
+    .g2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .g3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .g4 { grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); }
+    .stats { display: grid; gap: 1px; background: var(--hair);
+             border: 1px solid var(--hair); border-radius: var(--radius);
+             overflow: hidden; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .stat { background: var(--bg); padding: 22px 20px; }
+    .stat b { display: block; font-family: var(--display);
+              font-size: clamp(24px, 3vw, 34px); font-weight: var(--dw);
+              line-height: 1; margin-bottom: 8px; }
+    .stat span { font-size: 12px; letter-spacing: .12em;
+                 text-transform: uppercase; color: var(--muted); }
+    .card { background: var(--card); border: 1px solid var(--hair);
+            border-radius: var(--radius); padding: clamp(22px, 2.6vw, 32px); }
+    .card h3 { font-size: 22px; margin-bottom: 8px; }
+    .rows { border-top: 1px solid var(--hair); }
+    .row { display: flex; justify-content: space-between; gap: 20px;
+           padding: 15px 0; border-bottom: 1px solid var(--hair);
+           font-size: 15.5px; }
+    .row span:last-child { color: var(--muted); text-align: right; }
+    form { display: grid; gap: 14px; max-width: 540px; }
+    label { font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+            color: var(--muted); display: block; margin-bottom: 6px; }
+    input, select { width: 100%; font-family: var(--body); font-size: 16px;
+                    padding: 13px 15px; color: var(--ink);
+                    background: var(--input); border: 1px solid var(--hair);
+                    border-radius: var(--radius); }
+    input:focus, select:focus { outline: 2px solid var(--accent);
+                                outline-offset: 1px; }
+    .fine { font-size: 12.5px; line-height: 1.6; color: var(--muted); }
+    .msg { font-size: 14px; padding: 13px 15px; border-radius: var(--radius);
+           background: var(--card); border: 1px solid var(--accent); }
+    footer { padding: 56px 0 40px; border-top: 1px solid var(--hair); }
+    .foot { display: flex; flex-wrap: wrap; gap: 28px;
+            justify-content: space-between; align-items: flex-start; }
+    .foot h4 { font-family: var(--body); font-size: 11.5px;
+               letter-spacing: .18em; text-transform: uppercase;
+               color: var(--muted); margin: 0 0 8px; font-weight: 600; }
+    .switch { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .switch a { font-size: 12.5px; letter-spacing: .06em; padding: 9px 15px;
+                border: 1px solid var(--hair); border-radius: 999px;
+                text-decoration: none; color: var(--muted); }
+    .switch a:hover, .switch a[aria-current] { color: var(--ink);
+                border-color: var(--accent); }
+    @media (max-width: 780px) { .nav ul { display: none; } }
+
+
+    .hero { padding: clamp(40px, 6vw, 80px) 0 0; }
+    .hero h1 { font-size: clamp(42px, 7.4vw, 96px); font-weight: 600; }
+    .hero h1 em { font-style: italic; color: var(--accent-text);
+                  font-weight: 400; }
+    .hero .lead { max-width: 620px; margin: 22px 0 30px; }
+    .art-hof { border-radius: 26px; overflow: hidden;
+               border: 1px solid var(--hair); aspect-ratio: 1200 / 470;
+               margin-top: clamp(34px, 5vw, 62px); }
+    .pill { display: inline-block; padding: 8px 18px; border-radius: 999px;
+            background: var(--accent); color: var(--accent-ink);
+            font-size: 12.5px; letter-spacing: .12em;
+            text-transform: uppercase; }
+    .card { border-radius: 18px; }
+    .split { display: grid; gap: clamp(24px, 4vw, 60px);
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+             align-items: center; }
+    .leafy { border-left: 3px solid var(--accent-text); padding-left: 22px;
+             font-family: var(--display); font-style: italic;
+             font-size: clamp(22px, 3vw, 34px); line-height: 1.35;
+             max-width: 780px; }
+    .arch { border-radius: 999px 999px 18px 18px; overflow: hidden;
+            border: 1px solid var(--hair); background: var(--bg);
+            padding: 34px 26px 26px; text-align: center; }
+    .arch b { display: block; font-family: var(--display); font-size: 40px;
+              line-height: 1; margin-bottom: 6px; }
+    .arch span { font-size: 12px; letter-spacing: .12em;
+                 text-transform: uppercase; color: var(--muted); }
+
+  </style>
+</head>
+<body>
+  <div class="demo">VOORBEELD · richting 2 van 3 — concept door Spring Marketing Agency, geen officiële projectwebsite</div>
+    <header class="nav">
+    <a class="brand" href="#top">Sterrenwyck</a>
+    <nav><ul><li><a href="#project">Het project</a></li><li><a href="#woningen">Woningen</a></li><li><a href="#locatie">Ligging</a></li><li><a href="#duurzaam">Groen</a></li></ul></nav>
+    <a class="btn" href="#interesse">Interesselijst</a>
+  </header>
+  <main id="top">
+    <div class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Houtvaartkwartier · Haarlem Zuid-West</p>
+        <h1>Wonen rondom<br><em>de hof</em>.</h1>
+        <p class="lead">Drieëndertig koopappartementen rond een groene
+          binnenhof aan de Grijpensteinweg / Munterslaan. Wel het wonen-in-het-groen, niet het
+          tuinonderhoud.</p>
+        <div class="cta-row" style="display:flex;gap:14px;flex-wrap:wrap">
+          <a class="btn" href="#interesse">Zet mij op de lijst</a>
+          <a class="btn ghost" href="#woningen">Bekijk de woningen</a>
+        </div>
+        <div class="art-hof" data-reveal><svg viewBox="0 0 1200 470" preserveAspectRatio="xMidYMid slice"
+     aria-hidden="true" style="width:100%;height:100%">
+  <rect width="1200" height="470" fill="#EFEADB"/>
+  <path d="M0 330 C 240 300, 420 356, 640 330 S 1000 296, 1200 322" fill="none" stroke="#C9BFA6" stroke-width="12" opacity=".7"/><path d="M0 150 C 260 176, 420 120, 660 150 S 980 178, 1200 152" fill="none" stroke="#C9BFA6" stroke-width="8" opacity=".45"/>
+  <circle cx="285.6" cy="286.1" r="2.0" fill="#7E9A6B" opacity="0.44"/><circle cx="750.9" cy="166.4" r="1.2" fill="#7E9A6B" opacity="0.53"/><circle cx="311.2" cy="208.6" r="3.4" fill="#7E9A6B" opacity="0.39"/><circle cx="1003.8" cy="269.1" r="2.6" fill="#7E9A6B" opacity="0.26"/><circle cx="761.8" cy="367.0" r="2.4" fill="#7E9A6B" opacity="0.50"/><circle cx="805.7" cy="166.0" r="2.9" fill="#7E9A6B" opacity="0.44"/><circle cx="361.5" cy="157.8" r="3.1" fill="#7E9A6B" opacity="0.39"/><circle cx="862.6" cy="369.7" r="2.8" fill="#7E9A6B" opacity="0.57"/><circle cx="474.0" cy="350.2" r="2.2" fill="#7E9A6B" opacity="0.57"/><circle cx="1054.6" cy="174.4" r="1.5" fill="#7E9A6B" opacity="0.29"/><circle cx="1158.6" cy="259.0" r="2.6" fill="#7E9A6B" opacity="0.32"/><circle cx="608.7" cy="246.5" r="2.0" fill="#7E9A6B" opacity="0.43"/><circle cx="701.1" cy="376.1" r="2.7" fill="#7E9A6B" opacity="0.57"/><circle cx="1027.7" cy="397.7" r="2.7" fill="#7E9A6B" opacity="0.27"/><circle cx="1032.8" cy="391.2" r="3.2" fill="#7E9A6B" opacity="0.43"/><circle cx="856.6" cy="202.8" r="3.0" fill="#7E9A6B" opacity="0.43"/><circle cx="341.9" cy="165.9" r="3.1" fill="#7E9A6B" opacity="0.60"/><circle cx="106.2" cy="350.1" r="2.1" fill="#7E9A6B" opacity="0.26"/><circle cx="352.7" cy="342.2" r="3.1" fill="#7E9A6B" opacity="0.22"/><circle cx="737.4" cy="161.2" r="2.8" fill="#7E9A6B" opacity="0.33"/><circle cx="1057.1" cy="395.2" r="2.3" fill="#7E9A6B" opacity="0.60"/><circle cx="371.6" cy="169.2" r="2.5" fill="#7E9A6B" opacity="0.21"/><circle cx="236.9" cy="252.0" r="2.5" fill="#7E9A6B" opacity="0.26"/><circle cx="50.9" cy="366.9" r="1.9" fill="#7E9A6B" opacity="0.58"/><circle cx="1076.0" cy="244.4" r="2.2" fill="#7E9A6B" opacity="0.41"/><circle cx="772.7" cy="298.9" r="2.4" fill="#7E9A6B" opacity="0.45"/><circle cx="1128.7" cy="276.8" r="2.1" fill="#7E9A6B" opacity="0.49"/><circle cx="285.2" cy="225.3" r="3.4" fill="#7E9A6B" opacity="0.41"/><circle cx="658.1" cy="152.9" r="2.1" fill="#7E9A6B" opacity="0.43"/><circle cx="24.1" cy="303.9" r="2.6" fill="#7E9A6B" opacity="0.22"/><circle cx="752.8" cy="266.6" r="2.7" fill="#7E9A6B" opacity="0.34"/><circle cx="848.3" cy="334.5" r="1.2" fill="#7E9A6B" opacity="0.22"/><circle cx="811.2" cy="390.8" r="1.8" fill="#7E9A6B" opacity="0.38"/><circle cx="711.2" cy="230.0" r="2.0" fill="#7E9A6B" opacity="0.33"/><circle cx="443.0" cy="298.9" r="1.9" fill="#7E9A6B" opacity="0.35"/><circle cx="926.7" cy="156.7" r="2.5" fill="#7E9A6B" opacity="0.49"/><circle cx="372.0" cy="205.6" r="3.0" fill="#7E9A6B" opacity="0.30"/><circle cx="224.9" cy="258.8" r="2.7" fill="#7E9A6B" opacity="0.24"/><circle cx="386.4" cy="233.4" r="3.0" fill="#7E9A6B" opacity="0.38"/><circle cx="1026.6" cy="192.3" r="1.9" fill="#7E9A6B" opacity="0.46"/><circle cx="1061.9" cy="262.8" r="1.7" fill="#7E9A6B" opacity="0.25"/><circle cx="635.6" cy="197.7" r="3.0" fill="#7E9A6B" opacity="0.54"/><circle cx="220.3" cy="219.6" r="3.0" fill="#7E9A6B" opacity="0.46"/><circle cx="967.5" cy="236.3" r="1.5" fill="#7E9A6B" opacity="0.32"/><circle cx="952.6" cy="217.8" r="2.0" fill="#7E9A6B" opacity="0.37"/><circle cx="503.7" cy="252.4" r="3.2" fill="#7E9A6B" opacity="0.26"/><circle cx="5.6" cy="385.8" r="3.1" fill="#7E9A6B" opacity="0.59"/><circle cx="521.2" cy="387.5" r="3.2" fill="#7E9A6B" opacity="0.29"/><circle cx="894.6" cy="359.2" r="2.7" fill="#7E9A6B" opacity="0.41"/><circle cx="346.9" cy="235.3" r="1.7" fill="#7E9A6B" opacity="0.23"/><circle cx="706.4" cy="221.8" r="3.0" fill="#7E9A6B" opacity="0.22"/><circle cx="1084.3" cy="323.4" r="3.2" fill="#7E9A6B" opacity="0.56"/><circle cx="1079.6" cy="294.2" r="1.2" fill="#7E9A6B" opacity="0.50"/><circle cx="206.2" cy="225.0" r="2.7" fill="#7E9A6B" opacity="0.41"/><circle cx="496.5" cy="384.8" r="2.5" fill="#7E9A6B" opacity="0.34"/><circle cx="303.0" cy="365.4" r="2.2" fill="#7E9A6B" opacity="0.51"/><circle cx="422.2" cy="199.3" r="2.4" fill="#7E9A6B" opacity="0.53"/><circle cx="205.6" cy="347.9" r="3.2" fill="#7E9A6B" opacity="0.52"/><circle cx="988.2" cy="151.9" r="2.6" fill="#7E9A6B" opacity="0.55"/><circle cx="59.9" cy="217.8" r="1.8" fill="#7E9A6B" opacity="0.41"/><circle cx="507.6" cy="268.2" r="2.9" fill="#7E9A6B" opacity="0.20"/><circle cx="65.8" cy="181.7" r="1.5" fill="#7E9A6B" opacity="0.23"/><circle cx="1169.6" cy="363.6" r="1.4" fill="#7E9A6B" opacity="0.40"/><circle cx="379.1" cy="228.6" r="2.0" fill="#7E9A6B" opacity="0.46"/><circle cx="703.9" cy="240.2" r="1.6" fill="#7E9A6B" opacity="0.33"/><circle cx="148.5" cy="288.9" r="2.8" fill="#7E9A6B" opacity="0.35"/><circle cx="95.9" cy="194.6" r="2.0" fill="#7E9A6B" opacity="0.44"/><circle cx="939.1" cy="245.1" r="3.0" fill="#7E9A6B" opacity="0.45"/><circle cx="517.9" cy="243.1" r="2.3" fill="#7E9A6B" opacity="0.48"/><circle cx="504.6" cy="323.5" r="2.2" fill="#7E9A6B" opacity="0.30"/><circle cx="643.0" cy="323.8" r="1.4" fill="#7E9A6B" opacity="0.37"/><circle cx="511.0" cy="369.9" r="3.3" fill="#7E9A6B" opacity="0.35"/><circle cx="1077.4" cy="347.7" r="1.8" fill="#7E9A6B" opacity="0.39"/><circle cx="147.8" cy="353.3" r="2.7" fill="#7E9A6B" opacity="0.55"/><circle cx="951.0" cy="316.9" r="2.8" fill="#7E9A6B" opacity="0.43"/><circle cx="123.8" cy="296.9" r="1.2" fill="#7E9A6B" opacity="0.26"/><circle cx="929.2" cy="161.1" r="1.4" fill="#7E9A6B" opacity="0.24"/><circle cx="1056.6" cy="194.8" r="1.3" fill="#7E9A6B" opacity="0.54"/><circle cx="145.5" cy="361.0" r="2.7" fill="#7E9A6B" opacity="0.53"/><circle cx="1142.9" cy="294.8" r="3.0" fill="#7E9A6B" opacity="0.21"/><circle cx="920.9" cy="277.8" r="2.8" fill="#7E9A6B" opacity="0.24"/><circle cx="898.8" cy="383.6" r="1.3" fill="#7E9A6B" opacity="0.33"/><circle cx="676.8" cy="357.0" r="1.7" fill="#7E9A6B" opacity="0.27"/><circle cx="300.0" cy="304.0" r="2.9" fill="#7E9A6B" opacity="0.36"/><circle cx="441.0" cy="249.2" r="2.0" fill="#7E9A6B" opacity="0.37"/><circle cx="99.9" cy="275.1" r="3.3" fill="#7E9A6B" opacity="0.37"/><circle cx="896.9" cy="190.2" r="2.7" fill="#7E9A6B" opacity="0.50"/><circle cx="808.6" cy="279.3" r="2.3" fill="#7E9A6B" opacity="0.46"/><circle cx="1076.9" cy="187.3" r="1.4" fill="#7E9A6B" opacity="0.50"/><circle cx="1099.9" cy="279.3" r="2.2" fill="#7E9A6B" opacity="0.49"/>
+  <rect x="70" y="60" width="210" height="62" rx="3" fill="#E4DCC9" stroke="#C9BFA6"/><rect x="84" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="126" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="168" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="210" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="252" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="300" y="44" width="170" height="62" rx="3" fill="#E4DCC9" stroke="#C9BFA6"/><rect x="314" y="65" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="356" y="65" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="398" y="65" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="440" y="65" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="490" y="60" width="200" height="62" rx="3" fill="#E4DCC9" stroke="#C9BFA6"/><rect x="504" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="546" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="588" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="630" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="710" y="44" width="190" height="62" rx="3" fill="#E4DCC9" stroke="#C9BFA6"/><rect x="724" y="65" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="766" y="65" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="808" y="65" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="850" y="65" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="920" y="60" width="210" height="62" rx="3" fill="#E4DCC9" stroke="#C9BFA6"/><rect x="934" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="976" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="1018" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="1060" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="1102" y="81" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="70" y="372" width="250" height="58" rx="3" fill="#E4DCC9" stroke="#C9BFA6"/><rect x="84" y="391" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="126" y="391" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="168" y="391" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="210" y="391" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="252" y="391" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="340" y="386" width="230" height="58" rx="3" fill="#E4DCC9" stroke="#C9BFA6"/><rect x="354" y="405" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="396" y="405" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="438" y="405" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="480" y="405" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="522" y="405" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="590" y="372" width="240" height="58" rx="3" fill="#E4DCC9" stroke="#C9BFA6"/><rect x="604" y="391" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="646" y="391" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="688" y="391" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="730" y="391" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="772" y="391" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="850" y="386" width="280" height="58" rx="3" fill="#E4DCC9" stroke="#C9BFA6"/><rect x="864" y="405" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="906" y="405" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="948" y="405" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="990" y="405" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="1032" y="405" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/><rect x="1074" y="405" width="15" height="20" rx="1.5" fill="#2F4634" opacity=".2"/>
+  <circle cx="300" cy="250" r="74" fill="#7E9A6B" opacity=".95"/><circle cx="283" cy="235" r="45" fill="#2F4634" opacity=".18"/><rect x="297.5" y="320" width="5" height="26" fill="#2A241E" opacity=".5"/><circle cx="470" cy="190" r="52" fill="#7E9A6B" opacity=".95"/><circle cx="458" cy="179" r="32" fill="#2F4634" opacity=".18"/><rect x="467.5" y="238" width="5" height="26" fill="#2A241E" opacity=".5"/><circle cx="620" cy="268" r="62" fill="#7E9A6B" opacity=".95"/><circle cx="606" cy="255" r="38" fill="#2F4634" opacity=".18"/><rect x="617.5" y="326" width="5" height="26" fill="#2A241E" opacity=".5"/><circle cx="790" cy="196" r="46" fill="#7E9A6B" opacity=".95"/><circle cx="779" cy="186" r="28" fill="#2F4634" opacity=".18"/><rect x="787.5" y="238" width="5" height="26" fill="#2A241E" opacity=".5"/><circle cx="900" cy="272" r="56" fill="#7E9A6B" opacity=".95"/><circle cx="887" cy="260" r="34" fill="#2F4634" opacity=".18"/><rect x="897.5" y="324" width="5" height="26" fill="#2A241E" opacity=".5"/><circle cx="180" cy="190" r="44" fill="#7E9A6B" opacity=".95"/><circle cx="170" cy="181" r="27" fill="#2F4634" opacity=".18"/><rect x="177.5" y="230" width="5" height="26" fill="#2A241E" opacity=".5"/>
+</svg></div>
+      </div>
+    </div>
+
+    <section id="project">
+      <div class="wrap">
+        <div class="split">
+          <div data-reveal>
+            <p class="eyebrow">Het project</p>
+            <h2 style="font-size:clamp(30px,4vw,52px)">De nieuwe<br>tuinstad
+              van Haarlem.</h2>
+            <p class="lead" style="margin-top:20px">Het plan spreekt zelf van
+              een eigentijdse tuinstad: een boomgaard, een moestuin, groene
+              daken en een hof waar de buurt elkaar tegenkomt. Wij maken die
+              belofte zichtbaar — het groen is hier geen garnering.</p>
+          </div>
+          <div data-reveal>
+            <p class="muted">Voordeuren aan de straat, een beschutte hof aan
+              de binnenkant. Aan de Munterslaan liggen woningentrees direct
+              aan het trottoir, zodat de straat gaat leven. Op de hoek komt
+              ruimte voor een koffiezaak en buitenschoolse opvang.</p>
+            <div class="grid g3" style="margin-top:26px">
+              <div class="arch"><b>33</b><span>koopwoningen</span></div>
+              <div class="arch"><b>1</b><span>groene hof</span></div>
+              <div class="arch"><b>2027</b><span>start verkoop</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="woningen" style="background:var(--card)">
+      <div class="wrap">
+        <div data-reveal style="margin-bottom:clamp(28px,3.4vw,46px)">
+          <p class="eyebrow">De woningen</p>
+          <h2 style="font-size:clamp(28px,3.4vw,44px)">Vier typen, allemaal
+            met buitenruimte.</h2>
+        </div>
+        <div class="grid g4">        <article class="card" data-reveal>
+          <span class="pill">Type A</span>
+          <h3 style="margin-top:16px">Twee kamers</h3>
+          <p class="muted" style="margin:.2em 0 14px;font-size:15px">± 55 m²</p>
+          <p style="margin:0;font-size:15.5px">Compact wonen aan de fietsstraat, met een diep balkon aan de hofzijde.</p>
+        </article>        <article class="card" data-reveal>
+          <span class="pill">Type B</span>
+          <h3 style="margin-top:16px">Drie kamers</h3>
+          <p class="muted" style="margin:.2em 0 14px;font-size:15px">± 75 m²</p>
+          <p style="margin:0;font-size:15.5px">De ruggengraat van het plan: een woonkamer op het zuiden, twee slaapkamers, buitenruimte aan de hof.</p>
+        </article>        <article class="card" data-reveal>
+          <span class="pill">Type C</span>
+          <h3 style="margin-top:16px">Vier kamers</h3>
+          <p class="muted" style="margin:.2em 0 14px;font-size:15px">± 95 m²</p>
+          <p style="margin:0;font-size:15.5px">Voor wie blijft. Hoekligging, twee oriëntaties en ruimte voor een werkplek.</p>
+        </article>        <article class="card" data-reveal>
+          <span class="pill">Type D</span>
+          <h3 style="margin-top:16px">Hoekappartement</h3>
+          <p class="muted" style="margin:.2em 0 14px;font-size:15px">± 110 m²</p>
+          <p style="margin:0;font-size:15.5px">In het zeslaagse accent op de hoek met de Munterslaan — uitzicht over het Einsteinplantsoen.</p>
+        </article></div>
+        <p class="fine" style="margin-top:22px">Typen, oppervlakten en
+          plattegronden zijn indicatief en worden definitief bij de start van
+          de verkoop.</p>
+      </div>
+    </section>
+
+    <section id="locatie">
+      <div class="wrap">
+        <div class="split">
+          <div data-reveal>
+            <p class="eyebrow">De ligging</p>
+            <h2 style="font-size:clamp(28px,3.4vw,44px)">De Hout om de hoek,
+              het strand om de bocht.</h2>
+            <p class="leafy" style="margin-top:26px">Een buurt met bomen die
+              er al stonden — en straks een hof die er nog niet was.</p>
+          </div>
+          <div data-reveal><div class="rows"><div class="row"><span>Station Heemstede-Aerdenhout</span><span>op loopafstand</span></div><div class="row"><span>Amsterdam Centraal</span><span>± 25 min met de trein</span></div><div class="row"><span>Leiden Centraal</span><span>± 20 min met de trein</span></div><div class="row"><span>Centrum Haarlem</span><span>± 10 min op de fiets</span></div><div class="row"><span>De Hout & de Houtvaart</span><span>om de hoek</span></div><div class="row"><span>Strand Bloemendaal</span><span>± 20 min op de fiets</span></div></div>
+            <p class="fine" style="margin-top:16px">Reistijden indicatief.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="duurzaam" style="background:var(--card)">
+      <div class="wrap">
+        <div data-reveal style="margin-bottom:clamp(28px,3.4vw,46px)">
+          <p class="eyebrow">Klimaat &amp; groen</p>
+          <h2 style="font-size:clamp(28px,3.4vw,44px)">Water, schaduw en
+            bijen.</h2>
+        </div>
+        <div class="grid g3"><article class="card" data-reveal><h3>Groene daken</h3><p style="margin:0;font-size:15.5px" class="muted">Daken worden vergroend en waar mogelijk voorzien van zonnepanelen.</p></article><article class="card" data-reveal><h3>Water op eigen terrein</h3><p style="margin:0;font-size:15.5px" class="muted">Regenwater wordt op het binnenterrein geborgen — klimaatadaptief en koeler in de zomer.</p></article><article class="card" data-reveal><h3>Fietsstraat & deelmobiliteit</h3><p style="margin:0;font-size:15.5px" class="muted">De Grijpensteinweg wordt een fietsstraat; parkeren verdwijnt uit het straatbeeld.</p></article></div>
+      </div>
+    </section>
+
+    <section id="interesse">
+      <div class="wrap">      <div data-reveal>
+        <p class="eyebrow">Interesselijst</p>
+        <h2>Blijf op de hoogte van de hof.</h2>
+        <p class="lead muted" style="max-width:640px;margin:18px 0 30px">Schrijf je in voor de interesselijst en ontvang de plattegronden, prijsranges en bouwupdates als eerste — plus een uitnodiging voor de informatieavond.</p>
+      </div>
+      <form data-demo data-reveal>
+        <div><label for="naam">Naam</label>
+          <input id="naam" name="naam" type="text" placeholder="Voor- en achternaam"></div>
+        <div><label for="mail">E-mailadres</label>
+          <input id="mail" name="mail" type="email" placeholder="jij@voorbeeld.nl"></div>
+        <div><label for="type">Woningvoorkeur</label>
+          <select id="type" name="type">
+            <option>Twee kamers · ± 55 m²</option>
+            <option>Drie kamers · ± 75 m²</option>
+            <option>Vier kamers · ± 95 m²</option>
+            <option>Hoekappartement · ± 110 m²</option>
+            <option>Weet ik nog niet</option>
+          </select></div>
+        <button class="btn" type="submit">Zet mij op de lijst</button>
+        <p class="msg" data-msg hidden></p>
+        <p class="fine">Voorbeeldwebsite, gemaakt door Spring Marketing Agency om een merkrichting te tonen. Dit is niet de officiële projectwebsite van Sterrenwyck en niet uitgegeven door EFY Group of INBO. Alle woningtypen, oppervlakten en afstanden zijn indicatief.</p>
+      </form></div>
+    </section>
+  </main>
+  <footer id="colofon">
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <h4>Ontwikkeling</h4>
+          <p style="margin:0">EFY Group</p>
+        </div>
+        <div>
+          <h4>Stedenbouw &amp; architectuur</h4>
+          <p style="margin:0">INBO</p>
+        </div>
+        <div>
+          <h4>Marketing &amp; verkoop</h4>
+          <p style="margin:0">Spring Marketing Agency<br>
+            <span class="muted">onderdeel van Spring Real Estate</span></p>
+        </div>
+        <div>
+          <h4>Richting bekijken</h4>
+          <div class="switch"><a href="../">Alle drie de richtingen</a><a href="../onder-de-sterren/">Onder de sterren</a><a href="../de-nieuwe-tuinstad/" aria-current="page">De nieuwe tuinstad</a><a href="../wyck/">Wyck</a></div>
+        </div>
+      </div>
+      <hr class="hair" style="margin:34px 0 20px">
+      <p class="fine" style="max-width:820px">Voorbeeldwebsite, gemaakt door Spring Marketing Agency om een merkrichting te tonen. Dit is niet de officiële projectwebsite van Sterrenwyck en niet uitgegeven door EFY Group of INBO. Alle woningtypen, oppervlakten en afstanden zijn indicatief.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('[data-reveal]');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (e) { e.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (rows) {
+        rows.forEach(function (r) {
+          if (r.isIntersecting) { r.target.classList.add('in'); io.unobserve(r.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function (e) { io.observe(e); });
+
+      var form = document.querySelector('form[data-demo]');
+      if (form) {
+        form.addEventListener('submit', function (ev) {
+          ev.preventDefault();
+          var out = form.querySelector('[data-msg]');
+          out.hidden = false;
+          out.textContent = 'Dit is een voorbeeldwebsite — er is geen ' +
+            'inschrijving verstuurd en er zijn geen gegevens opgeslagen.';
+        });
+      }
+
+      var nav = document.querySelector('.nav');
+      if (nav) {
+        window.addEventListener('scroll', function () {
+          nav.classList.toggle('solid', window.scrollY > 40);
+        }, { passive: true });
+      }
+    })();
+  </script>
+</body>
+</html>
